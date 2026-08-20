@@ -5,9 +5,12 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <title>Birthday Reminder 🎂</title>
+    <title>Birthday Surprise 🎂💖</title>
 
 
     <style>
@@ -16,13 +19,16 @@
             box-sizing: border-box;
         }
 
+
         body {
 
             margin: 0;
 
             min-height: 100vh;
 
-            font-family: Arial, sans-serif;
+            font-family:
+                Arial,
+                sans-serif;
 
             background:
                 linear-gradient(
@@ -40,16 +46,28 @@
 
             color: white;
 
+            padding: 20px;
+
         }
 
 
+        /* =========================
+           MAIN CONTAINER
+        ========================== */
+
         .container {
 
-            width: 90%;
+            width: 100%;
 
-            max-width: 550px;
+            max-width: 560px;
 
-            background: rgba(0, 0, 0, 0.35);
+            background:
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.35
+                );
 
             padding: 30px;
 
@@ -57,16 +75,26 @@
 
             box-shadow:
                 0 10px 40px
-                rgba(0,0,0,0.3);
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.3
+                );
 
             text-align: center;
+
+            backdrop-filter:
+                blur(10px);
 
         }
 
 
         h1 {
 
-            font-size: 35px;
+            font-size: 36px;
+
+            margin-top: 0;
 
             margin-bottom: 25px;
 
@@ -79,11 +107,13 @@
 
             text-align: left;
 
-            margin-top: 15px;
+            margin-top: 17px;
 
-            margin-bottom: 6px;
+            margin-bottom: 7px;
 
             font-weight: bold;
+
+            font-size: 15px;
 
         }
 
@@ -93,7 +123,7 @@
 
             width: 100%;
 
-            padding: 13px;
+            padding: 14px;
 
             border: none;
 
@@ -101,23 +131,86 @@
 
             font-size: 16px;
 
+            outline: none;
+
         }
 
 
         textarea {
 
-            height: 100px;
+            height: 110px;
 
             resize: none;
 
         }
 
 
+        input[type="file"] {
+
+            background: white;
+
+            color: #555;
+
+            cursor: pointer;
+
+        }
+
+
+        /* =========================
+           PHOTO PREVIEW
+        ========================== */
+
+        #photoPreview {
+
+            display: none;
+
+            width: 160px;
+
+            height: 160px;
+
+            object-fit: cover;
+
+            border-radius: 50%;
+
+            margin: 18px auto;
+
+            border:
+                5px solid white;
+
+            box-shadow:
+                0 8px 30px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.35
+                );
+
+        }
+
+
+        .photoHint {
+
+            font-size: 13px;
+
+            opacity: 0.8;
+
+            margin-top: 5px;
+
+        }
+
+
+        /* =========================
+           BUTTONS
+        ========================== */
+
         button {
 
             margin-top: 20px;
 
-            padding: 14px 30px;
+            padding:
+                14px
+                30px;
 
             border: none;
 
@@ -133,24 +226,34 @@
 
             cursor: pointer;
 
+            transition:
+                transform 0.25s ease;
+
         }
 
 
         button:hover {
 
-            transform: scale(1.05);
+            transform:
+                scale(1.05);
 
         }
 
 
         #testButton {
 
-            background: #ffe066;
+            background:
+                #ffe066;
 
-            color: #7a4e00;
+            color:
+                #7a4e00;
 
         }
 
+
+        /* =========================
+           SAVED DETAILS
+        ========================== */
 
         #savedDetails {
 
@@ -158,14 +261,45 @@
 
             margin-top: 25px;
 
-            background: rgba(255,255,255,0.15);
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.15
+                );
 
             padding: 20px;
 
-            border-radius: 15px;
+            border-radius: 18px;
 
         }
 
+
+        #savedPhoto {
+
+            display: none;
+
+            width: 120px;
+
+            height: 120px;
+
+            object-fit: cover;
+
+            border-radius: 50%;
+
+            border:
+                4px solid white;
+
+            margin:
+                5px auto 15px;
+
+        }
+
+
+        /* =========================
+           BIRTHDAY POPUP
+        ========================== */
 
         #birthdayPopup {
 
@@ -176,7 +310,12 @@
             inset: 0;
 
             background:
-                rgba(0,0,0,0.88);
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.88
+                );
 
             z-index: 9999;
 
@@ -186,16 +325,22 @@
 
             text-align: center;
 
+            padding: 20px;
+
         }
 
 
         .popupContent {
 
-            width: 90%;
+            width: 95%;
 
-            max-width: 650px;
+            max-width: 680px;
 
-            padding: 40px;
+            max-height: 90vh;
+
+            overflow-y: auto;
+
+            padding: 40px 25px;
 
             border-radius: 30px;
 
@@ -207,52 +352,113 @@
                     #845ec2
                 );
 
+            box-shadow:
+                0 0 60px
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.25
+                );
+
             animation:
                 popupAnimation
+                0.8s ease;
+
+        }
+
+
+        /* =========================
+           POPUP PHOTO
+        ========================== */
+
+        #popupPhoto {
+
+            display: none;
+
+            width: 230px;
+
+            height: 230px;
+
+            object-fit: cover;
+
+            border-radius: 50%;
+
+            border:
+                7px solid white;
+
+            margin:
+                15px auto 20px;
+
+            box-shadow:
+                0 10px 35px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.45
+                );
+
+            animation:
+                photoAnimation
                 1s ease;
-
-        }
-
-
-        .popupContent h2 {
-
-            font-size: 50px;
-
-            margin: 10px;
-
-        }
-
-
-        .popupContent h3 {
-
-            font-size: 35px;
-
-            margin: 15px;
 
         }
 
 
         .cake {
 
-            font-size: 100px;
+            font-size: 85px;
+
+            animation:
+                cakeBounce
+                1s infinite
+                alternate;
+
+        }
+
+
+        .popupContent h2 {
+
+            font-size: 48px;
+
+            margin:
+                10px 0;
+
+        }
+
+
+        .popupContent h3 {
+
+            font-size: 34px;
+
+            margin:
+                15px 0;
 
         }
 
 
         #popupMessage {
 
-            font-size: 21px;
+            font-size: 20px;
 
-            line-height: 1.6;
+            line-height: 1.7;
+
+            white-space: pre-line;
 
         }
 
+
+        /* =========================
+           ANIMATIONS
+        ========================== */
 
         @keyframes popupAnimation {
 
             from {
 
-                transform: scale(0);
+                transform:
+                    scale(0.3);
 
                 opacity: 0;
 
@@ -260,7 +466,8 @@
 
             to {
 
-                transform: scale(1);
+                transform:
+                    scale(1);
 
                 opacity: 1;
 
@@ -268,6 +475,52 @@
 
         }
 
+
+        @keyframes photoAnimation {
+
+            from {
+
+                transform:
+                    scale(0);
+
+                opacity: 0;
+
+            }
+
+            to {
+
+                transform:
+                    scale(1);
+
+                opacity: 1;
+
+            }
+
+        }
+
+
+        @keyframes cakeBounce {
+
+            from {
+
+                transform:
+                    translateY(0);
+
+            }
+
+            to {
+
+                transform:
+                    translateY(-12px);
+
+            }
+
+        }
+
+
+        /* =========================
+           CONFETTI
+        ========================== */
 
         .confetti {
 
@@ -278,6 +531,8 @@
             z-index: 10000;
 
             font-size: 25px;
+
+            pointer-events: none;
 
             animation:
                 confettiFall
@@ -307,6 +562,68 @@
 
         }
 
+
+        /* =========================
+           MOBILE
+        ========================== */
+
+        @media (
+            max-width: 600px
+        ) {
+
+            .container {
+
+                padding: 22px;
+
+            }
+
+
+            h1 {
+
+                font-size: 29px;
+
+            }
+
+
+            .popupContent {
+
+                padding:
+                    30px 18px;
+
+            }
+
+
+            .popupContent h2 {
+
+                font-size: 34px;
+
+            }
+
+
+            .popupContent h3 {
+
+                font-size: 27px;
+
+            }
+
+
+            #popupMessage {
+
+                font-size: 17px;
+
+            }
+
+
+            #popupPhoto {
+
+                width: 180px;
+
+                height: 180px;
+
+            }
+
+        }
+
     </style>
 
 </head>
@@ -315,852 +632,1339 @@
 <body>
 
 
-<div class="container">
+    <!-- =========================
+         MAIN PAGE
+    ========================== -->
+
+    <div class="container">
 
 
-    <h1>
-        🎂 Birthday Reminder
-    </h1>
+        <h1>
+            🎂 Birthday Surprise 💖
+        </h1>
 
 
-    <label>
-        👤 Person Name
-    </label>
+        <!-- NAME -->
 
-    <input
-        type="text"
-        id="name"
-        placeholder="Enter birthday person's name"
-    >
+        <label>
+            👤 Person Name
+        </label>
 
-
-    <label>
-        🎂 Date of Birth
-    </label>
-
-    <input
-        type="date"
-        id="dob"
-    >
+        <input
+            type="text"
+            id="name"
+            placeholder="Enter birthday person's name"
+        >
 
 
-    <label>
-        ⏰ Wish Time
-    </label>
+        <!-- DOB -->
 
-    <input
-        type="time"
-        id="wishTime"
-        value="00:00"
-    >
+        <label>
+            🎂 Date of Birth
+        </label>
 
-
-    <label>
-        💌 Birthday Wish
-    </label>
-
-    <textarea
-        id="wish"
-        placeholder="Write your birthday wish here..."
-    ></textarea>
+        <input
+            type="date"
+            id="dob"
+        >
 
 
-    <label>
-        🎵 Birthday Music
-    </label>
+        <!-- TIME -->
 
-    <input
-        type="file"
-        id="music"
-        accept="audio/*"
-    >
+        <label>
+            ⏰ Wish Time
+        </label>
 
-
-    <button onclick="saveBirthday()">
-        💾 SAVE BIRTHDAY
-    </button>
+        <input
+            type="time"
+            id="wishTime"
+            value="00:00"
+        >
 
 
-    <br>
+        <!-- PHOTO -->
 
+        <label>
+            📸 Birthday Person's Photo
+        </label>
 
-    <button
-        id="testButton"
-        onclick="testBirthday()">
+        <input
+            type="file"
+            id="photo"
+            accept="image/*"
+            onchange="previewPhoto()"
+        >
 
-        🧪 TEST BIRTHDAY
-
-    </button>
-
-
-    <div id="savedDetails">
-
-        <h2>
-            💖 Birthday Saved!
-        </h2>
-
-        <p id="savedName"></p>
-
-        <p id="savedDOB"></p>
-
-        <p id="savedTime"></p>
-
-        <p>
-            🔔 The page will check the birthday automatically.
-        </p>
-
-    </div>
-
-
-</div>
-
-
-
-<!-- BIRTHDAY POPUP -->
-
-
-<div id="birthdayPopup">
-
-
-    <div class="popupContent">
-
-
-        <div class="cake">
-            🎂
-        </div>
-
-
-        <h2>
-            🎉 HAPPY BIRTHDAY 🎉
-        </h2>
-
-
-        <h3 id="popupName">
-        </h3>
-
-
-        <p id="popupMessage">
+        <p class="photoHint">
+            Choose your bestie's photo 💕
         </p>
 
 
-        <button onclick="closeBirthday()">
+        <!-- PHOTO PREVIEW -->
 
-            ❤️ Close Surprise
+        <img
+            id="photoPreview"
+            alt="Photo Preview"
+        >
 
+
+        <!-- WISH -->
+
+        <label>
+            💌 Birthday Wish
+        </label>
+
+        <textarea
+            id="wish"
+            placeholder="Write your birthday wish here..."
+        ></textarea>
+
+
+        <!-- MUSIC -->
+
+        <label>
+            🎵 Birthday Music
+        </label>
+
+        <input
+            type="file"
+            id="music"
+            accept="audio/*"
+        >
+
+
+        <!-- SAVE BUTTON -->
+
+        <button
+            onclick="saveBirthday()"
+        >
+            💾 SAVE BIRTHDAY
         </button>
 
 
+        <br>
+
+
+        <!-- TEST BUTTON -->
+
+        <button
+            id="testButton"
+            onclick="testBirthday()"
+        >
+            🧪 TEST SURPRISE
+        </button>
+
+
+        <!-- SAVED DETAILS -->
+
+        <div
+            id="savedDetails"
+        >
+
+            <h2>
+                💖 Birthday Saved!
+            </h2>
+
+
+            <img
+                id="savedPhoto"
+                alt="Saved Birthday Photo"
+            >
+
+
+            <p
+                id="savedName"
+            ></p>
+
+
+            <p
+                id="savedDOB"
+            ></p>
+
+
+            <p
+                id="savedTime"
+            ></p>
+
+
+            <p>
+                🔔 The page will check the birthday automatically.
+            </p>
+
+        </div>
+
+
     </div>
 
-</div>
+
+    <!-- =========================
+         BIRTHDAY POPUP
+    ========================== -->
+
+    <div
+        id="birthdayPopup"
+    >
+
+        <div
+            class="popupContent"
+        >
 
 
-
-<!-- MUSIC -->
-
-
-<audio
-    id="birthdayMusic"
-    loop>
-</audio>
+            <div class="cake">
+                🎂
+            </div>
 
 
-
-<script>
-
-
-/* ==========================================
-   SAVED DATA
-========================================== */
+            <h2>
+                🎉 HAPPY BIRTHDAY 🎉
+            </h2>
 
 
-let savedBirthday =
-    JSON.parse(
-        localStorage.getItem("birthdayData")
-    );
+            <!-- PERSON PHOTO -->
+
+            <img
+                id="popupPhoto"
+                alt="Birthday Person"
+            >
 
 
+            <!-- PERSON NAME -->
 
-/* ==========================================
-   SAVE BIRTHDAY
-========================================== */
-
-
-function saveBirthday() {
-
-
-    const name =
-        document.getElementById("name").value.trim();
+            <h3
+                id="popupName"
+            >
+            </h3>
 
 
-    const dob =
-        document.getElementById("dob").value;
+            <!-- WISH -->
+
+            <p
+                id="popupMessage"
+            >
+            </p>
 
 
-    const wishTime =
-        document.getElementById("wishTime").value;
+            <!-- CLOSE -->
+
+            <button
+                onclick="closeBirthday()"
+            >
+                ❤️ Close Surprise
+            </button>
 
 
-    const wish =
-        document.getElementById("wish").value.trim();
+        </div>
+
+    </div>
 
 
-    const musicFile =
-        document.getElementById("music").files[0];
+    <!-- =========================
+         AUDIO
+    ========================== -->
+
+    <audio
+        id="birthdayMusic"
+        loop
+    ></audio>
 
 
-    if (!name || !dob || !wishTime) {
-
-        alert(
-            "Please enter Name, Date of Birth and Wish Time."
-        );
-
-        return;
-
-    }
+    <script>
 
 
-    if (musicFile) {
+        /* =====================================
+           LOAD SAVED BIRTHDAY DATA
+        ====================================== */
+
+        let savedBirthday = null;
 
 
-        const reader =
-            new FileReader();
+        try {
+
+            savedBirthday =
+                JSON.parse(
+                    localStorage.getItem(
+                        "birthdayData"
+                    )
+                );
+
+        }
+
+        catch (error) {
+
+            savedBirthday = null;
+
+        }
 
 
-        reader.onload =
-            function(event) {
+        /* =====================================
+           PHOTO PREVIEW
+        ====================================== */
+
+        function previewPhoto() {
+
+
+            const photoFile =
+                document
+                    .getElementById(
+                        "photo"
+                    )
+                    .files[0];
+
+
+            const preview =
+                document.getElementById(
+                    "photoPreview"
+                );
+
+
+            if (!photoFile) {
+
+                preview.style.display =
+                    "none";
+
+                return;
+
+            }
+
+
+            /* CHECK IMAGE */
+
+            if (
+                !photoFile.type
+                    .startsWith(
+                        "image/"
+                    )
+            ) {
+
+                alert(
+                    "Please select an image file."
+                );
+
+                return;
+
+            }
+
+
+            const reader =
+                new FileReader();
+
+
+            reader.onload =
+                function(event) {
+
+                    preview.src =
+                        event.target.result;
+
+                    preview.style.display =
+                        "block";
+
+                };
+
+
+            reader.readAsDataURL(
+                photoFile
+            );
+
+        }
+
+
+        /* =====================================
+           SAVE BIRTHDAY
+        ====================================== */
+
+        function saveBirthday() {
+
+
+            const name =
+                document
+                    .getElementById(
+                        "name"
+                    )
+                    .value
+                    .trim();
+
+
+            const dob =
+                document
+                    .getElementById(
+                        "dob"
+                    )
+                    .value;
+
+
+            const wishTime =
+                document
+                    .getElementById(
+                        "wishTime"
+                    )
+                    .value;
+
+
+            const wish =
+                document
+                    .getElementById(
+                        "wish"
+                    )
+                    .value
+                    .trim();
+
+
+            const photoFile =
+                document
+                    .getElementById(
+                        "photo"
+                    )
+                    .files[0];
+
+
+            const musicFile =
+                document
+                    .getElementById(
+                        "music"
+                    )
+                    .files[0];
+
+
+            /* REQUIRED FIELDS */
+
+            if (
+                !name ||
+                !dob ||
+                !wishTime
+            ) {
+
+                alert(
+                    "Please enter Name, Date of Birth and Wish Time."
+                );
+
+                return;
+
+            }
+
+
+            /* =========================
+               PHOTO READER
+            ========================== */
+
+            if (photoFile) {
+
+
+                const photoReader =
+                    new FileReader();
+
+
+                photoReader.onload =
+                    function(event) {
+
+
+                        const photoData =
+                            event.target.result;
+
+
+                        saveMusic(
+                            name,
+                            dob,
+                            wishTime,
+                            wish,
+                            photoData,
+                            musicFile
+                        );
+
+                    };
+
+
+                photoReader.readAsDataURL(
+                    photoFile
+                );
+
+            }
+
+            else {
+
+
+                /* KEEP OLD PHOTO */
+
+                const oldPhoto =
+                    savedBirthday &&
+                    savedBirthday.photo
+                        ? savedBirthday.photo
+                        : "";
+
+
+                saveMusic(
+                    name,
+                    dob,
+                    wishTime,
+                    wish,
+                    oldPhoto,
+                    musicFile
+                );
+
+            }
+
+        }
+
+
+        /* =====================================
+           SAVE MUSIC
+        ====================================== */
+
+        function saveMusic(
+            name,
+            dob,
+            wishTime,
+            wish,
+            photo,
+            musicFile
+        ) {
+
+
+            if (musicFile) {
+
+
+                const musicReader =
+                    new FileReader();
+
+
+                musicReader.onload =
+                    function(event) {
+
+
+                        saveData(
+                            name,
+                            dob,
+                            wishTime,
+                            wish,
+                            photo,
+                            event.target.result
+                        );
+
+                    };
+
+
+                musicReader.readAsDataURL(
+                    musicFile
+                );
+
+            }
+
+            else {
+
+
+                /* KEEP OLD MUSIC */
+
+                const oldMusic =
+                    savedBirthday &&
+                    savedBirthday.music
+                        ? savedBirthday.music
+                        : "";
 
 
                 saveData(
+                    name,
+                    dob,
+                    wishTime,
+                    wish,
+                    photo,
+                    oldMusic
+                );
 
+            }
+
+        }
+
+
+        /* =====================================
+           SAVE DATA
+        ====================================== */
+
+        function saveData(
+            name,
+            dob,
+            wishTime,
+            wish,
+            photo,
+            music
+        ) {
+
+
+            const data = {
+
+                name:
                     name,
 
+                dob:
                     dob,
 
+                wishTime:
                     wishTime,
 
+                wish:
                     wish,
 
-                    event.target.result
+                photo:
+                    photo,
 
-                );
+                music:
+                    music,
+
+                lastAlertDate:
+                    ""
 
             };
 
 
-        reader.readAsDataURL(musicFile);
+            try {
 
-    }
 
-    else {
+                localStorage.setItem(
+                    "birthdayData",
+                    JSON.stringify(
+                        data
+                    )
+                );
 
 
-        saveData(
+            }
 
-            name,
+            catch (error) {
 
-            dob,
 
-            wishTime,
-
-            wish,
-
-            ""
-
-        );
-
-    }
-
-}
-
-
-
-/* ==========================================
-   SAVE DATA TO BROWSER
-========================================== */
-
-
-function saveData(
-    name,
-    dob,
-    wishTime,
-    wish,
-    music
-) {
-
-
-    const data = {
-
-        name: name,
-
-        dob: dob,
-
-        wishTime: wishTime,
-
-        wish: wish,
-
-        music: music,
-
-        lastAlertDate: ""
-
-    };
-
-
-    localStorage.setItem(
-
-        "birthdayData",
-
-        JSON.stringify(data)
-
-    );
-
-
-    savedBirthday = data;
-
-
-    showSavedDetails();
-
-
-    alert(
-        "🎂 Birthday saved successfully!"
-    );
-
-}
-
-
-
-/* ==========================================
-   SHOW SAVED DATA
-========================================== */
-
-
-function showSavedDetails() {
-
-
-    if (!savedBirthday) {
-
-        return;
-
-    }
-
-
-    document.getElementById(
-        "savedDetails"
-    ).style.display = "block";
-
-
-    document.getElementById(
-        "savedName"
-    ).innerHTML =
-
-        "👤 Name: " +
-        savedBirthday.name;
-
-
-    document.getElementById(
-        "savedDOB"
-    ).innerHTML =
-
-        "🎂 Date: " +
-        savedBirthday.dob;
-
-
-    document.getElementById(
-        "savedTime"
-    ).innerHTML =
-
-        "⏰ Wish Time: " +
-        savedBirthday.wishTime;
-
-}
-
-
-
-/* ==========================================
-   TEST BUTTON
-========================================== */
-
-
-function testBirthday() {
-
-
-    if (!savedBirthday) {
-
-
-        alert(
-            "First enter the birthday details and click SAVE BIRTHDAY."
-        );
-
-
-        return;
-
-    }
-
-
-    showBirthday();
-
-}
-
-
-
-/* ==========================================
-   CHECK REAL BIRTHDAY
-========================================== */
-
-
-function checkBirthday() {
-
-
-    if (!savedBirthday) {
-
-        return;
-
-    }
-
-
-    const now =
-        new Date();
-
-
-    const currentMonth =
-        String(
-            now.getMonth() + 1
-        ).padStart(2, "0");
-
-
-    const currentDay =
-        String(
-            now.getDate()
-        ).padStart(2, "0");
-
-
-    const currentYear =
-        now.getFullYear();
-
-
-    const currentTime =
-
-        String(
-            now.getHours()
-        ).padStart(2, "0")
-
-        +
-
-        ":" +
-
-        String(
-            now.getMinutes()
-        ).padStart(2, "0");
-
-
-    const dobParts =
-        savedBirthday.dob.split("-");
-
-
-    const birthMonth =
-        dobParts[1];
-
-
-    const birthDay =
-        dobParts[2];
-
-
-    const today =
-
-        currentYear
-        +
-        "-"
-        +
-        currentMonth
-        +
-        "-"
-        +
-        currentDay;
-
-
-    const isBirthday =
-
-        currentMonth === birthMonth
-        &&
-        currentDay === birthDay;
-
-
-    const correctTime =
-
-        currentTime ===
-        savedBirthday.wishTime;
-
-
-    const alreadyAlerted =
-
-        savedBirthday.lastAlertDate ===
-        today;
-
-
-    if (
-
-        isBirthday
-        &&
-        correctTime
-        &&
-        !alreadyAlerted
-
-    ) {
-
-
-        savedBirthday.lastAlertDate =
-            today;
-
-
-        localStorage.setItem(
-
-            "birthdayData",
-
-            JSON.stringify(
-                savedBirthday
-            )
-
-        );
-
-
-        showBirthday();
-
-    }
-
-}
-
-
-
-/* ==========================================
-   SHOW BIRTHDAY SURPRISE
-========================================== */
-
-
-function showBirthday() {
-
-
-    document.getElementById(
-        "birthdayPopup"
-    ).style.display = "flex";
-
-
-    document.getElementById(
-        "popupName"
-    ).innerHTML =
-
-        savedBirthday.name
-        +
-        " ❤️";
-
-
-    document.getElementById(
-        "popupMessage"
-    ).innerHTML =
-
-        savedBirthday.wish
-        ||
-
-        "Wishing you a beautiful birthday filled with happiness, love and wonderful memories! 🎂❤️✨";
-
-
-    playMusic();
-
-
-    createConfetti();
-
-
-    sendNotification();
-
-}
-
-
-
-/* ==========================================
-   PLAY MUSIC
-========================================== */
-
-
-function playMusic() {
-
-
-    const audio =
-
-        document.getElementById(
-            "birthdayMusic"
-        );
-
-
-    if (
-        savedBirthday.music
-    ) {
-
-
-        audio.src =
-            savedBirthday.music;
-
-
-        audio.play().catch(
-
-            function() {
+                console.error(
+                    error
+                );
 
 
                 alert(
+                    "⚠️ Photo or music file is too large. Please select a smaller file."
+                );
 
-                    "🔊 Music was blocked by the browser. Click anywhere on the page and try TEST BIRTHDAY again."
+
+                return;
+
+            }
+
+
+            savedBirthday =
+                data;
+
+
+            showSavedDetails();
+
+
+            alert(
+                "🎂 Birthday saved successfully! 💖"
+            );
+
+        }
+
+
+        /* =====================================
+           SHOW SAVED DETAILS
+        ====================================== */
+
+        function showSavedDetails() {
+
+
+            if (!savedBirthday) {
+
+                return;
+
+            }
+
+
+            document
+                .getElementById(
+                    "savedDetails"
+                )
+                .style.display =
+                "block";
+
+
+            document
+                .getElementById(
+                    "savedName"
+                )
+                .innerHTML =
+
+                "👤 Name: " +
+                savedBirthday.name;
+
+
+            document
+                .getElementById(
+                    "savedDOB"
+                )
+                .innerHTML =
+
+                "🎂 Date: " +
+                savedBirthday.dob;
+
+
+            document
+                .getElementById(
+                    "savedTime"
+                )
+                .innerHTML =
+
+                "⏰ Wish Time: " +
+                savedBirthday.wishTime;
+
+
+            const savedPhoto =
+                document.getElementById(
+                    "savedPhoto"
+                );
+
+
+            if (
+                savedBirthday.photo
+            ) {
+
+
+                savedPhoto.src =
+                    savedBirthday.photo;
+
+
+                savedPhoto.style.display =
+                    "block";
+
+            }
+
+            else {
+
+
+                savedPhoto.style.display =
+                    "none";
+
+            }
+
+        }
+
+
+        /* =====================================
+           TEST SURPRISE
+        ====================================== */
+
+        function testBirthday() {
+
+
+            if (!savedBirthday) {
+
+
+                alert(
+                    "First enter the birthday details and click SAVE BIRTHDAY."
+                );
+
+
+                return;
+
+            }
+
+
+            showBirthday();
+
+        }
+
+
+        /* =====================================
+           CHECK REAL BIRTHDAY
+        ====================================== */
+
+        function checkBirthday() {
+
+
+            if (!savedBirthday) {
+
+                return;
+
+            }
+
+
+            const now =
+                new Date();
+
+
+            /* CURRENT MONTH */
+
+            const currentMonth =
+                String(
+                    now.getMonth() + 1
+                )
+                .padStart(
+                    2,
+                    "0"
+                );
+
+
+            /* CURRENT DAY */
+
+            const currentDay =
+                String(
+                    now.getDate()
+                )
+                .padStart(
+                    2,
+                    "0"
+                );
+
+
+            /* CURRENT YEAR */
+
+            const currentYear =
+                now.getFullYear();
+
+
+            /* CURRENT TIME */
+
+            const currentTime =
+
+                String(
+                    now.getHours()
+                )
+                .padStart(
+                    2,
+                    "0"
+                )
+
+                +
+
+                ":"
+
+                +
+
+                String(
+                    now.getMinutes()
+                )
+                .padStart(
+                    2,
+                    "0"
+                );
+
+
+            /* DOB */
+
+            const dobParts =
+                savedBirthday.dob
+                    .split("-");
+
+
+            const birthMonth =
+                dobParts[1];
+
+
+            const birthDay =
+                dobParts[2];
+
+
+            /* TODAY */
+
+            const today =
+
+                currentYear
+                +
+                "-"
+                +
+                currentMonth
+                +
+                "-"
+                +
+                currentDay;
+
+
+            /* BIRTHDAY? */
+
+            const isBirthday =
+
+                currentMonth ===
+                    birthMonth
+
+                &&
+
+                currentDay ===
+                    birthDay;
+
+
+            /* CORRECT TIME? */
+
+            const correctTime =
+
+                currentTime ===
+                savedBirthday.wishTime;
+
+
+            /* ALREADY SHOWN? */
+
+            const alreadyAlerted =
+
+                savedBirthday
+                    .lastAlertDate
+                ===
+                today;
+
+
+            if (
+
+                isBirthday
+
+                &&
+
+                correctTime
+
+                &&
+
+                !alreadyAlerted
+
+            ) {
+
+
+                savedBirthday
+                    .lastAlertDate =
+                    today;
+
+
+                localStorage.setItem(
+                    "birthdayData",
+                    JSON.stringify(
+                        savedBirthday
+                    )
+                );
+
+
+                showBirthday();
+
+            }
+
+        }
+
+
+        /* =====================================
+           SHOW BIRTHDAY
+        ====================================== */
+
+        function showBirthday() {
+
+
+            if (!savedBirthday) {
+
+                return;
+
+            }
+
+
+            /* POPUP */
+
+            document
+                .getElementById(
+                    "birthdayPopup"
+                )
+                .style.display =
+                "flex";
+
+
+            /* NAME */
+
+            document
+                .getElementById(
+                    "popupName"
+                )
+                .innerHTML =
+
+                savedBirthday.name
+                +
+                " ❤️";
+
+
+            /* MESSAGE */
+
+            document
+                .getElementById(
+                    "popupMessage"
+                )
+                .innerHTML =
+
+                savedBirthday.wish
+
+                ||
+
+                "Wishing you a beautiful birthday filled with happiness, love and wonderful memories! 🎂❤️✨";
+
+
+            /* PHOTO */
+
+            const popupPhoto =
+                document.getElementById(
+                    "popupPhoto"
+                );
+
+
+            if (
+                savedBirthday.photo
+            ) {
+
+
+                popupPhoto.src =
+                    savedBirthday.photo;
+
+
+                popupPhoto.style.display =
+                    "block";
+
+            }
+
+            else {
+
+
+                popupPhoto.style.display =
+                    "none";
+
+            }
+
+
+            /* MUSIC */
+
+            playMusic();
+
+
+            /* CONFETTI */
+
+            createConfetti();
+
+
+            /* NOTIFICATION */
+
+            sendNotification();
+
+        }
+
+
+        /* =====================================
+           PLAY MUSIC
+        ====================================== */
+
+        function playMusic() {
+
+
+            const audio =
+                document.getElementById(
+                    "birthdayMusic"
+                );
+
+
+            if (
+                savedBirthday &&
+                savedBirthday.music
+            ) {
+
+
+                audio.src =
+                    savedBirthday.music;
+
+
+                audio.play()
+                    .catch(
+                        function(error) {
+
+                            console.log(
+                                "Browser blocked autoplay:",
+                                error
+                            );
+
+                        }
+                    );
+
+            }
+
+        }
+
+
+        /* =====================================
+           NOTIFICATION
+        ====================================== */
+
+        function sendNotification() {
+
+
+            if (
+                !(
+                    "Notification"
+                    in window
+                )
+            ) {
+
+                return;
+
+            }
+
+
+            if (
+                Notification.permission
+                ===
+                "granted"
+            ) {
+
+
+                new Notification(
+
+                    "🎉 HAPPY BIRTHDAY!",
+
+                    {
+
+                        body:
+
+                            "It's " +
+                            savedBirthday.name +
+                            "'s birthday! 🎂❤️"
+
+                    }
 
                 );
 
             }
 
-        );
 
-    }
+            else if (
 
-    else {
+                Notification.permission
+                !==
+                "denied"
 
-
-        alert(
-            "🎵 No music selected. Choose an MP3 file and SAVE BIRTHDAY again."
-        );
-
-    }
-
-}
+            ) {
 
 
-
-/* ==========================================
-   NOTIFICATION
-========================================== */
-
-
-function sendNotification() {
-
-
-    if (
-        !("Notification" in window)
-    ) {
-
-        return;
-
-    }
-
-
-    if (
-        Notification.permission ===
-        "granted"
-    ) {
-
-
-        new Notification(
-
-            "🎉 HAPPY BIRTHDAY!",
-
-            {
-
-                body:
-
-                    "It's " +
-                    savedBirthday.name +
-                    "'s birthday! 🎂❤️"
+                Notification
+                    .requestPermission();
 
             }
 
-        );
-
-    }
+        }
 
 
-    else if (
+        /* =====================================
+           CONFETTI
+        ====================================== */
 
-        Notification.permission !==
-        "denied"
-
-    ) {
-
-
-        Notification.requestPermission();
-
-    }
-
-}
+        function createConfetti() {
 
 
+            const emojis = [
 
-/* ==========================================
-   CONFETTI
-========================================== */
+                "🎉",
+                "🎊",
+                "❤️",
+                "✨",
+                "🎂",
+                "🥳",
+                "💖",
+                "⭐",
+                "🌸",
+                "💕",
+                "🦋",
+                "💐"
 
-
-function createConfetti() {
-
-
-    const emojis = [
-
-        "🎉",
-        "🎊",
-        "❤️",
-        "✨",
-        "🎂",
-        "🥳",
-        "💖",
-        "⭐"
-
-    ];
-
-
-    for (
-        let i = 0;
-        i < 120;
-        i++
-    ) {
-
-
-        const confetti =
-
-            document.createElement(
-                "div"
-            );
-
-
-        confetti.className =
-            "confetti";
-
-
-        confetti.innerHTML =
-
-            emojis[
-                Math.floor(
-                    Math.random()
-                    *
-                    emojis.length
-                )
             ];
 
 
-        confetti.style.left =
-
-            Math.random()
-            *
-            100
-            +
-            "vw";
+            for (
+                let i = 0;
+                i < 120;
+                i++
+            ) {
 
 
-        confetti.style.animationDuration =
-
-            2
-            +
-            Math.random()
-            *
-            4
-            +
-            "s";
+                const confetti =
+                    document.createElement(
+                        "div"
+                    );
 
 
-        document.body.appendChild(
-            confetti
+                confetti
+                    .className =
+                    "confetti";
+
+
+                confetti.innerHTML =
+
+                    emojis[
+                        Math.floor(
+                            Math.random()
+                            *
+                            emojis.length
+                        )
+                    ];
+
+
+                confetti.style.left =
+
+                    Math.random()
+                    *
+                    100
+                    +
+                    "vw";
+
+
+                confetti.style.animationDuration =
+
+                    (
+                        2
+                        +
+                        Math.random()
+                        *
+                        4
+                    )
+                    +
+                    "s";
+
+
+                confetti.style.animationDelay =
+
+                    Math.random()
+                    *
+                    2
+                    +
+                    "s";
+
+
+                document.body
+                    .appendChild(
+                        confetti
+                    );
+
+
+                setTimeout(
+
+                    function() {
+
+                        confetti.remove();
+
+                    },
+
+                    7000
+
+                );
+
+            }
+
+        }
+
+
+        /* =====================================
+           CLOSE BIRTHDAY
+        ====================================== */
+
+        function closeBirthday() {
+
+
+            document
+                .getElementById(
+                    "birthdayPopup"
+                )
+                .style.display =
+                "none";
+
+
+            const audio =
+                document.getElementById(
+                    "birthdayMusic"
+                );
+
+
+            audio.pause();
+
+
+            audio.currentTime =
+                0;
+
+        }
+
+
+        /* =====================================
+           LOAD SAVED DATA
+        ====================================== */
+
+        if (
+            savedBirthday
+        ) {
+
+
+            document
+                .getElementById(
+                    "name"
+                )
+                .value =
+                savedBirthday.name
+                || "";
+
+
+            document
+                .getElementById(
+                    "dob"
+                )
+                .value =
+                savedBirthday.dob
+                || "";
+
+
+            document
+                .getElementById(
+                    "wishTime"
+                )
+                .value =
+                savedBirthday.wishTime
+                || "00:00";
+
+
+            document
+                .getElementById(
+                    "wish"
+                )
+                .value =
+                savedBirthday.wish
+                || "";
+
+
+            /* LOAD PHOTO */
+
+            if (
+                savedBirthday.photo
+            ) {
+
+
+                const preview =
+                    document.getElementById(
+                        "photoPreview"
+                    );
+
+
+                preview.src =
+                    savedBirthday.photo;
+
+
+                preview.style.display =
+                    "block";
+
+            }
+
+
+            showSavedDetails();
+
+        }
+
+
+        /* =====================================
+           CHECK EVERY SECOND
+        ====================================== */
+
+        setInterval(
+
+            checkBirthday,
+
+            1000
+
         );
 
 
-        setTimeout(
-
-            function() {
-
-                confetti.remove();
-
-            },
-
-            6000
-
-        );
-
-    }
-
-}
-
-
-
-/* ==========================================
-   CLOSE POPUP
-========================================== */
-
-
-function closeBirthday() {
-
-
-    document.getElementById(
-        "birthdayPopup"
-    ).style.display =
-        "none";
-
-
-    const audio =
-
-        document.getElementById(
-            "birthdayMusic"
-        );
-
-
-    audio.pause();
-
-}
-
-
-
-/* ==========================================
-   LOAD SAVED DATA
-========================================== */
-
-
-if (savedBirthday) {
-
-
-    document.getElementById(
-        "name"
-    ).value =
-        savedBirthday.name;
-
-
-    document.getElementById(
-        "dob"
-    ).value =
-        savedBirthday.dob;
-
-
-    document.getElementById(
-        "wishTime"
-    ).value =
-        savedBirthday.wishTime;
-
-
-    document.getElementById(
-        "wish"
-    ).value =
-        savedBirthday.wish;
-
-
-    showSavedDetails();
-
-}
-
-
-
-/* ==========================================
-   CHECK EVERY SECOND
-========================================== */
-
-
-setInterval(
-
-    checkBirthday,
-
-    1000
-
-);
-
-
-</script>
+    </script>
 
 
 </body>
