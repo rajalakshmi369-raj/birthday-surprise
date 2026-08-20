@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Birthday Reminder 🎂</title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+
+            margin: 0;
+
+            min-height: 100vh;
+
+            font-family: Arial, sans-serif;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ff758c,
+                    #ff7eb3,
+                    #6a5acd
+                );
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            color: white;
+
+        }
+
+
+        .container {
+
+            width: 90%;
+
+            max-width: 550px;
+
+            background: rgba(0, 0, 0, 0.35);
+
+            padding: 30px;
+
+            border-radius: 25px;
+
+            box-shadow:
+                0 10px 40px
+                rgba(0,0,0,0.3);
+
+            text-align: center;
+
+        }
+
+
+        h1 {
+
+            font-size: 35px;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        label {
+
+            display: block;
+
+            text-align: left;
+
+            margin-top: 15px;
+
+            margin-bottom: 6px;
+
+            font-weight: bold;
+
+        }
+
+
+        input,
+        textarea {
+
+            width: 100%;
+
+            padding: 13px;
+
+            border: none;
+
+            border-radius: 12px;
+
+            font-size: 16px;
+
+        }
+
+
+        textarea {
+
+            height: 100px;
+
+            resize: none;
+
+        }
+
+
+        button {
+
+            margin-top: 20px;
+
+            padding: 14px 30px;
+
+            border: none;
+
+            border-radius: 30px;
+
+            background: white;
+
+            color: #ff4f81;
+
+            font-size: 18px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+        }
+
+
+        button:hover {
+
+            transform: scale(1.05);
+
+        }
+
+
+        #testButton {
+
+            background: #ffe066;
+
+            color: #7a4e00;
+
+        }
+
+
+        #savedDetails {
+
+            display: none;
+
+            margin-top: 25px;
+
+            background: rgba(255,255,255,0.15);
+
+            padding: 20px;
+
+            border-radius: 15px;
+
+        }
+
+
+        #birthdayPopup {
+
+            display: none;
+
+            position: fixed;
+
+            inset: 0;
+
+            background:
+                rgba(0,0,0,0.88);
+
+            z-index: 9999;
+
+            justify-content: center;
+
+            align-items: center;
+
+            text-align: center;
+
+        }
+
+
+        .popupContent {
+
+            width: 90%;
+
+            max-width: 650px;
+
+            padding: 40px;
+
+            border-radius: 30px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ff758c,
+                    #ff7eb3,
+                    #845ec2
+                );
+
+            animation:
+                popupAnimation
+                1s ease;
+
+        }
+
+
+        .popupContent h2 {
+
+            font-size: 50px;
+
+            margin: 10px;
+
+        }
+
+
+        .popupContent h3 {
+
+            font-size: 35px;
+
+            margin: 15px;
+
+        }
+
+
+        .cake {
+
+            font-size: 100px;
+
+        }
+
+
+        #popupMessage {
+
+            font-size: 21px;
+
+            line-height: 1.6;
+
+        }
+
+
+        @keyframes popupAnimation {
+
+            from {
+
+                transform: scale(0);
+
+                opacity: 0;
+
+            }
+
+            to {
+
+                transform: scale(1);
+
+                opacity: 1;
+
+            }
+
+        }
+
+
+        .confetti {
+
+            position: fixed;
+
+            top: -30px;
+
+            z-index: 10000;
+
+            font-size: 25px;
+
+            animation:
+                confettiFall
+                4s linear
+                forwards;
+
+        }
+
+
+        @keyframes confettiFall {
+
+            from {
+
+                transform:
+                    translateY(0)
+                    rotate(0deg);
+
+            }
+
+            to {
+
+                transform:
+                    translateY(110vh)
+                    rotate(720deg);
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <h1>
+        🎂 Birthday Reminder
+    </h1>
+
+
+    <label>
+        👤 Person Name
+    </label>
+
+    <input
+        type="text"
+        id="name"
+        placeholder="Enter birthday person's name"
+    >
+
+
+    <label>
+        🎂 Date of Birth
+    </label>
+
+    <input
+        type="date"
+        id="dob"
+    >
+
+
+    <label>
+        ⏰ Wish Time
+    </label>
+
+    <input
+        type="time"
+        id="wishTime"
+        value="00:00"
+    >
+
+
+    <label>
+        💌 Birthday Wish
+    </label>
+
+    <textarea
+        id="wish"
+        placeholder="Write your birthday wish here..."
+    ></textarea>
+
+
+    <label>
+        🎵 Birthday Music
+    </label>
+
+    <input
+        type="file"
+        id="music"
+        accept="audio/*"
+    >
+
+
+    <button onclick="saveBirthday()">
+        💾 SAVE BIRTHDAY
+    </button>
+
+
+    <br>
+
+
+    <button
+        id="testButton"
+        onclick="testBirthday()">
+
+        🧪 TEST BIRTHDAY
+
+    </button>
+
+
+    <div id="savedDetails">
+
+        <h2>
+            💖 Birthday Saved!
+        </h2>
+
+        <p id="savedName"></p>
+
+        <p id="savedDOB"></p>
+
+        <p id="savedTime"></p>
+
+        <p>
+            🔔 The page will check the birthday automatically.
+        </p>
+
+    </div>
+
+
+</div>
+
+
+
+<!-- BIRTHDAY POPUP -->
+
+
+<div id="birthdayPopup">
+
+
+    <div class="popupContent">
+
+
+        <div class="cake">
+            🎂
+        </div>
+
+
+        <h2>
+            🎉 HAPPY BIRTHDAY 🎉
+        </h2>
+
+
+        <h3 id="popupName">
+        </h3>
+
+
+        <p id="popupMessage">
+        </p>
+
+
+        <button onclick="closeBirthday()">
+
+            ❤️ Close Surprise
+
+        </button>
+
+
+    </div>
+
+</div>
+
+
+
+<!-- MUSIC -->
+
+
+<audio
+    id="birthdayMusic"
+    loop>
+</audio>
+
+
+
+<script>
+
+
+/* ==========================================
+   SAVED DATA
+========================================== */
+
+
+let savedBirthday =
+    JSON.parse(
+        localStorage.getItem("birthdayData")
+    );
+
+
+
+/* ==========================================
+   SAVE BIRTHDAY
+========================================== */
+
+
+function saveBirthday() {
+
+
+    const name =
+        document.getElementById("name").value.trim();
+
+
+    const dob =
+        document.getElementById("dob").value;
+
+
+    const wishTime =
+        document.getElementById("wishTime").value;
+
+
+    const wish =
+        document.getElementById("wish").value.trim();
+
+
+    const musicFile =
+        document.getElementById("music").files[0];
+
+
+    if (!name || !dob || !wishTime) {
+
+        alert(
+            "Please enter Name, Date of Birth and Wish Time."
+        );
+
+        return;
+
+    }
+
+
+    if (musicFile) {
+
+
+        const reader =
+            new FileReader();
+
+
+        reader.onload =
+            function(event) {
+
+
+                saveData(
+
+                    name,
+
+                    dob,
+
+                    wishTime,
+
+                    wish,
+
+                    event.target.result
+
+                );
+
+            };
+
+
+        reader.readAsDataURL(musicFile);
+
+    }
+
+    else {
+
+
+        saveData(
+
+            name,
+
+            dob,
+
+            wishTime,
+
+            wish,
+
+            ""
+
+        );
+
+    }
+
+}
+
+
+
+/* ==========================================
+   SAVE DATA TO BROWSER
+========================================== */
+
+
+function saveData(
+    name,
+    dob,
+    wishTime,
+    wish,
+    music
+) {
+
+
+    const data = {
+
+        name: name,
+
+        dob: dob,
+
+        wishTime: wishTime,
+
+        wish: wish,
+
+        music: music,
+
+        lastAlertDate: ""
+
+    };
+
+
+    localStorage.setItem(
+
+        "birthdayData",
+
+        JSON.stringify(data)
+
+    );
+
+
+    savedBirthday = data;
+
+
+    showSavedDetails();
+
+
+    alert(
+        "🎂 Birthday saved successfully!"
+    );
+
+}
+
+
+
+/* ==========================================
+   SHOW SAVED DATA
+========================================== */
+
+
+function showSavedDetails() {
+
+
+    if (!savedBirthday) {
+
+        return;
+
+    }
+
+
+    document.getElementById(
+        "savedDetails"
+    ).style.display = "block";
+
+
+    document.getElementById(
+        "savedName"
+    ).innerHTML =
+
+        "👤 Name: " +
+        savedBirthday.name;
+
+
+    document.getElementById(
+        "savedDOB"
+    ).innerHTML =
+
+        "🎂 Date: " +
+        savedBirthday.dob;
+
+
+    document.getElementById(
+        "savedTime"
+    ).innerHTML =
+
+        "⏰ Wish Time: " +
+        savedBirthday.wishTime;
+
+}
+
+
+
+/* ==========================================
+   TEST BUTTON
+========================================== */
+
+
+function testBirthday() {
+
+
+    if (!savedBirthday) {
+
+
+        alert(
+            "First enter the birthday details and click SAVE BIRTHDAY."
+        );
+
+
+        return;
+
+    }
+
+
+    showBirthday();
+
+}
+
+
+
+/* ==========================================
+   CHECK REAL BIRTHDAY
+========================================== */
+
+
+function checkBirthday() {
+
+
+    if (!savedBirthday) {
+
+        return;
+
+    }
+
+
+    const now =
+        new Date();
+
+
+    const currentMonth =
+        String(
+            now.getMonth() + 1
+        ).padStart(2, "0");
+
+
+    const currentDay =
+        String(
+            now.getDate()
+        ).padStart(2, "0");
+
+
+    const currentYear =
+        now.getFullYear();
+
+
+    const currentTime =
+
+        String(
+            now.getHours()
+        ).padStart(2, "0")
+
+        +
+
+        ":" +
+
+        String(
+            now.getMinutes()
+        ).padStart(2, "0");
+
+
+    const dobParts =
+        savedBirthday.dob.split("-");
+
+
+    const birthMonth =
+        dobParts[1];
+
+
+    const birthDay =
+        dobParts[2];
+
+
+    const today =
+
+        currentYear
+        +
+        "-"
+        +
+        currentMonth
+        +
+        "-"
+        +
+        currentDay;
+
+
+    const isBirthday =
+
+        currentMonth === birthMonth
+        &&
+        currentDay === birthDay;
+
+
+    const correctTime =
+
+        currentTime ===
+        savedBirthday.wishTime;
+
+
+    const alreadyAlerted =
+
+        savedBirthday.lastAlertDate ===
+        today;
+
+
+    if (
+
+        isBirthday
+        &&
+        correctTime
+        &&
+        !alreadyAlerted
+
+    ) {
+
+
+        savedBirthday.lastAlertDate =
+            today;
+
+
+        localStorage.setItem(
+
+            "birthdayData",
+
+            JSON.stringify(
+                savedBirthday
+            )
+
+        );
+
+
+        showBirthday();
+
+    }
+
+}
+
+
+
+/* ==========================================
+   SHOW BIRTHDAY SURPRISE
+========================================== */
+
+
+function showBirthday() {
+
+
+    document.getElementById(
+        "birthdayPopup"
+    ).style.display = "flex";
+
+
+    document.getElementById(
+        "popupName"
+    ).innerHTML =
+
+        savedBirthday.name
+        +
+        " ❤️";
+
+
+    document.getElementById(
+        "popupMessage"
+    ).innerHTML =
+
+        savedBirthday.wish
+        ||
+
+        "Wishing you a beautiful birthday filled with happiness, love and wonderful memories! 🎂❤️✨";
+
+
+    playMusic();
+
+
+    createConfetti();
+
+
+    sendNotification();
+
+}
+
+
+
+/* ==========================================
+   PLAY MUSIC
+========================================== */
+
+
+function playMusic() {
+
+
+    const audio =
+
+        document.getElementById(
+            "birthdayMusic"
+        );
+
+
+    if (
+        savedBirthday.music
+    ) {
+
+
+        audio.src =
+            savedBirthday.music;
+
+
+        audio.play().catch(
+
+            function() {
+
+
+                alert(
+
+                    "🔊 Music was blocked by the browser. Click anywhere on the page and try TEST BIRTHDAY again."
+
+                );
+
+            }
+
+        );
+
+    }
+
+    else {
+
+
+        alert(
+            "🎵 No music selected. Choose an MP3 file and SAVE BIRTHDAY again."
+        );
+
+    }
+
+}
+
+
+
+/* ==========================================
+   NOTIFICATION
+========================================== */
+
+
+function sendNotification() {
+
+
+    if (
+        !("Notification" in window)
+    ) {
+
+        return;
+
+    }
+
+
+    if (
+        Notification.permission ===
+        "granted"
+    ) {
+
+
+        new Notification(
+
+            "🎉 HAPPY BIRTHDAY!",
+
+            {
+
+                body:
+
+                    "It's " +
+                    savedBirthday.name +
+                    "'s birthday! 🎂❤️"
+
+            }
+
+        );
+
+    }
+
+
+    else if (
+
+        Notification.permission !==
+        "denied"
+
+    ) {
+
+
+        Notification.requestPermission();
+
+    }
+
+}
+
+
+
+/* ==========================================
+   CONFETTI
+========================================== */
+
+
+function createConfetti() {
+
+
+    const emojis = [
+
+        "🎉",
+        "🎊",
+        "❤️",
+        "✨",
+        "🎂",
+        "🥳",
+        "💖",
+        "⭐"
+
+    ];
+
+
+    for (
+        let i = 0;
+        i < 120;
+        i++
+    ) {
+
+
+        const confetti =
+
+            document.createElement(
+                "div"
+            );
+
+
+        confetti.className =
+            "confetti";
+
+
+        confetti.innerHTML =
+
+            emojis[
+                Math.floor(
+                    Math.random()
+                    *
+                    emojis.length
+                )
+            ];
+
+
+        confetti.style.left =
+
+            Math.random()
+            *
+            100
+            +
+            "vw";
+
+
+        confetti.style.animationDuration =
+
+            2
+            +
+            Math.random()
+            *
+            4
+            +
+            "s";
+
+
+        document.body.appendChild(
+            confetti
+        );
+
+
+        setTimeout(
+
+            function() {
+
+                confetti.remove();
+
+            },
+
+            6000
+
+        );
+
+    }
+
+}
+
+
+
+/* ==========================================
+   CLOSE POPUP
+========================================== */
+
+
+function closeBirthday() {
+
+
+    document.getElementById(
+        "birthdayPopup"
+    ).style.display =
+        "none";
+
+
+    const audio =
+
+        document.getElementById(
+            "birthdayMusic"
+        );
+
+
+    audio.pause();
+
+}
+
+
+
+/* ==========================================
+   LOAD SAVED DATA
+========================================== */
+
+
+if (savedBirthday) {
+
+
+    document.getElementById(
+        "name"
+    ).value =
+        savedBirthday.name;
+
+
+    document.getElementById(
+        "dob"
+    ).value =
+        savedBirthday.dob;
+
+
+    document.getElementById(
+        "wishTime"
+    ).value =
+        savedBirthday.wishTime;
+
+
+    document.getElementById(
+        "wish"
+    ).value =
+        savedBirthday.wish;
+
+
+    showSavedDetails();
+
+}
+
+
+
+/* ==========================================
+   CHECK EVERY SECOND
+========================================== */
+
+
+setInterval(
+
+    checkBirthday,
+
+    1000
+
+);
+
+
+</script>
+
+
+</body>
+
+</html>
